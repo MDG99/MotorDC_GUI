@@ -16,7 +16,7 @@ class gui():
 
         self.ventana = Tk()
         #self.ventana.geometry("300x200")
-        self.ventana.resizable(width=None, height=None) #Ventana no redimensionable
+        self.ventana.resizable(width=0, height=0) #Ventana no redimensionable
         self.ventana.title("Control del motor DC")
 
         #Listamos los dispositivos conectados al puerto COM
