@@ -16,6 +16,7 @@ class gui():
 
         self.ventana = Tk()
         #self.ventana.geometry("300x200")
+        self.ventana.resizable(width=None, height=None) #Ventana no redimensionable
         self.ventana.title("Control del motor DC")
 
         #Listamos los dispositivos conectados al puerto COM
@@ -138,23 +139,44 @@ class gui():
         txt_degree = self.txt_angle.get()
 
         try:
-            degree = int(txt_degree)
+            degree = str(txt_degree)
+            degree = bytes(degree, 'UTF-8')
         except:
-            degree = 0
+            degree = b'0'
 
-        self.txt_angle.delete(0, 'end')
+        self.txt_angle.delete(0, 'end') #Eliminamos el texto del comboBox
+
         #Mandamos la información
-        self.micro.write(b"MT")
-        self.micro.write(bytes(degree))
-        self.micro.write(b"\n")
-        print(bytes(degree))
+        instruccion = b"MT " + degree + b"\n"
+
+        self.micro.write(instruccion)
+
+        #print(instruccion.decode('utf-8'))#Comprobamos que se envió en el formato adecuado
 
     def show(self):
         #Aquí se lee el micro
-        current_pos = "1"
-        current_vel = "1"
-        self.lblcurrent_pos.config(text=f' {current_pos} ')
+
+        # El puerto serie nos da un dato del tipo byte, con el terminado de línea \r\n
+        # Por lo tanto, es necesario decodificarlo para convertirlo a String y eliminar
+        # Los terminadores de línea
+
+        self.micro.write(b"GP\n") #Instrucción de lectura de posición
+        self.micro.flushInput()
+        current_pos = self.micro.readline() #Leemos la posición
+        current_pos = current_pos.decode('utf-8')
+        current_pos = current_pos.rstrip("\r\n")
+        current_pos = current_pos
+
+        self.micro.write(b"GS\n")  # Instrucción de lectura de velocidad
+        self.micro.flushInput()
+        current_vel = self.micro.readline()  # Leemos la velocidad
+        current_vel = current_vel.decode('utf-8')
+        current_vel = current_vel.rstrip("\r\n")
+        current_vel = int(current_vel)
+
+        self.lblcurrent_pos.config(text=f' {current_pos}° ')
         self.lblcurrent_vel.config(text=f' {current_vel} ')
+
 
 my_app = gui()
 my_app.ventana.mainloop()
