@@ -27,6 +27,10 @@ class gui():
         self.fontformat_title =TkFont.Font(family="Arial", size=15, weight="bold")
         self.fontformat_sub = TkFont.Font(family="Arial", size=12)
 
+        #Imagenes
+        #imagen = PhotoImage(file="uady.png")
+        #self.banner = Label(self.ventana, image=imagen).place(x=0,y=0)
+        
         #Botones
         self.btnConectar = Button(self.ventana, text="Conectar", width=15, command=self.connect)
         self.btnConectar.grid(column=2, row=1, padx=5, pady=5)
