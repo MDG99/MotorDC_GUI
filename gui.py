@@ -31,6 +31,12 @@ class gui():
         self.imagen = PhotoImage(file="uady.png")
         self.banner = Label(self.ventana, image=self.imagen).place(x=0,y=0)
         
+        self.horarioimg = PhotoImage(file="horario.png")
+        self.antihorarioimg = PhotoImage(file="antihorario.png")
+
+        self.frenteimg = Label(self.ventana, image=self.horarioimg).grid(column=0,row=4)
+        self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
+
         #Botones
         self.btnConectar = Button(self.ventana, text="Conectar", width=15, command=self.connect)
         self.btnConectar.grid(column=2, row=1, padx=5, pady=5)
@@ -39,25 +45,25 @@ class gui():
         self.btnDesconectar.grid(column=2, row=2, padx=5, pady=5)
 
         self.btnFrente = Button(self.ventana, text="Frente", width=15, command=self.forward)
-        self.btnFrente.grid(column=0, row=4, padx=5, pady=5)
+        self.btnFrente.grid(column=0, row=5, padx=5, pady=5)
 
         self.btnReversa = Button(self.ventana, text="Reversa", width=15, command=self.backward)
-        self.btnReversa.grid(column=1, row=4, padx=5, pady=5)
+        self.btnReversa.grid(column=1, row=5, padx=5, pady=5)
 
         self.btnParo = Button(self.ventana, text="Paro", width=15, command=self.stop)
-        self.btnParo.grid(column=2, row=4, padx=5, pady=5)
+        self.btnParo.grid(column=2, row=5, padx=5, pady=5)
 
         self.btnVelMas = Button(self.ventana, text="+", width=5, command=self.add)
-        self.btnVelMas.grid(column=0, row=5, padx=5, pady=5)
+        self.btnVelMas.grid(column=0, row=6, padx=5, pady=5)
 
         self.btnVelMenos = Button(self.ventana, text="-", width=5, command=self.less)
-        self.btnVelMenos.grid(column=2, row=5, padx=5, pady=5)
+        self.btnVelMenos.grid(column=2, row=6, padx=5, pady=5)
 
         self.btnPos = Button(self.ventana, text="Enviar", width=10, command=self.sendData)
-        self.btnPos.grid(column=2, row=6, padx=5, pady=5)
+        self.btnPos.grid(column=2, row=7, padx=5, pady=5)
 
         self.btnshow = Button(self.ventana, text="Mostrar", width=10, command=self.show)
-        self.btnshow.grid(column=2, row=11, padx=5, pady=5)
+        self.btnshow.grid(column=2, row=12, padx=5, pady=5)
 
         #Texto
         self.lbltitle0 = Label(self.ventana, text="Conectividad", font=self.fontformat_title)
@@ -70,29 +76,29 @@ class gui():
         self.lbltitle1.grid(column=0, row=3, padx=5, pady=5, columnspan=3)
 
         self.lblvel = Label(self.ventana, text="Vel.", font=self.fontformat_sub)
-        self.lblvel.grid(column=1, row=5, padx=5, pady=5)
+        self.lblvel.grid(column=1, row=6, padx=5, pady=5)
 
         self.lblpos = Label(self.ventana, text="Mover (Grados)", font=self.fontformat_sub)
-        self.lblpos.grid(column=0, row=6, padx=5, pady=5)
+        self.lblpos.grid(column=0, row=7, padx=5, pady=5)
 
         self.lbltitle2 = Label(self.ventana, text="Funciones de Monitoreo", font=self.fontformat_title)
-        self.lbltitle2.grid(column=0, row=8, padx=5, pady=15, columnspan=3)
+        self.lbltitle2.grid(column=0, row=9, padx=5, pady=15, columnspan=3)
 
         self.lblsubtitle1 = Label(self.ventana, text="Posición Actual del Encoder (Grados)", font=self.fontformat_sub)
-        self.lblsubtitle1.grid(column=0, row=9, padx=5, pady=5, columnspan=2, sticky="e")
+        self.lblsubtitle1.grid(column=0, row=10, padx=5, pady=5, columnspan=2, sticky="e")
 
         self.lblcurrent_pos = Label(self.ventana, text=f' ', font=self.fontformat_sub)
-        self.lblcurrent_pos.grid(column=2, row=9, padx=5, pady=5)
+        self.lblcurrent_pos.grid(column=2, row=10, padx=5, pady=5)
 
         self.lblsubtitle2 = Label(self.ventana, text="Velocidad Actual (PWM)", font=self.fontformat_sub)
-        self.lblsubtitle2.grid(column=0, row=10, padx=5, pady=5, columnspan=2, sticky="e")
+        self.lblsubtitle2.grid(column=0, row=11, padx=5, pady=5, columnspan=2, sticky="e")
 
         self.lblcurrent_vel = Label(self.ventana, text=f' ', font=self.fontformat_sub)
-        self.lblcurrent_vel.grid(column=2, row=10, padx=5, pady=5)
+        self.lblcurrent_vel.grid(column=2, row=11, padx=5, pady=5)
 
         #Textboxes
         self.txt_angle = Entry(self.ventana, width=10)
-        self.txt_angle.grid(column=1, row=6)
+        self.txt_angle.grid(column=1, row=7)
 
         #Combobox
         self.cmbPorts = ttk.Combobox(self.ventana, width=10, values=self.port_names)
