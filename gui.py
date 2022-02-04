@@ -128,10 +128,19 @@ class gui():
     def forward(self):
         #Enviamos la instrucción
         self.micro.write(b"F\n")
+        #Mostrar la imagen requerida
+        # self.frenteimg = Label(self.ventana, image=self.horarioimg).grid(column=0,row=4)
+        #Eliminar la imagen contraria
+        # self.reversaimg.grid_remove()
+
 
     def backward(self):
         # Enviamos la instrucción
         self.micro.write(b"R\n")
+        #Mostrar la imagen requerida
+        # self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
+        #Eliminar la imagen contraria
+        # self.frenteimg.grid_remove()
 
     def stop(self):
         # Enviamos la instrucción
