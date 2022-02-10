@@ -28,14 +28,15 @@ class gui():
         self.fontformat_sub = TkFont.Font(family="Arial", size=12)
 
         #Imagenes
-        self.imagen = PhotoImage(file="uady.png")
+        self.imagen = PhotoImage(file="UADY_simple.png")
         self.banner = Label(self.ventana, image=self.imagen).place(x=0,y=0)
         
         self.horarioimg = PhotoImage(file="horario.png")
-        self.antihorarioimg = PhotoImage(file="antihorario.png")
+        # self.antihorarioimg = PhotoImage(file="antihorario.png")
 
-        self.frenteimg = Label(self.ventana, image=self.horarioimg).grid(column=0,row=4)
-        self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
+        self.frenteimg = Label(self.ventana, image=self.horarioimg)
+        self.frenteimg.grid(column=0, row=4, padx=5, pady=5)
+        # self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
 
         #Botones
         self.btnConectar = Button(self.ventana, text="Conectar", width=15, command=self.connect)
@@ -128,19 +129,17 @@ class gui():
     def forward(self):
         #Enviamos la instrucción
         self.micro.write(b"F\n")
-        #Mostrar la imagen requerida
-        # self.frenteimg = Label(self.ventana, image=self.horarioimg).grid(column=0,row=4)
-        #Eliminar la imagen contraria
-        # self.reversaimg.grid_remove()
-
+        self.horarioimg = PhotoImage(file="horario.png")
+        # self.antihorarioimg = PhotoImage(file="antihorario.png")
+        self.frenteimg = Label(self.ventana, image=self.horarioimg)
+        self.frenteimg.grid(column=0,row=4)
+        # self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
 
     def backward(self):
         # Enviamos la instrucción
         self.micro.write(b"R\n")
-        #Mostrar la imagen requerida
-        # self.reversaimg = Label(self.ventana, image=self.antihorarioimg).grid(column=1,row=4)
-        #Eliminar la imagen contraria
-        # self.frenteimg.grid_remove()
+        # Remover imagen
+        self.frenteimg.grid_remove()
 
     def stop(self):
         # Enviamos la instrucción
